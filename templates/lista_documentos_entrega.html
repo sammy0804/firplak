@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Documentos de Entrega{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Documentos de Entrega</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID del Documento</th>
+                <th>ID del Pedido</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in documentos %}
+                <tr>
+                    <td>{{ documento.documento_entrega_id }}</td>
+                    <td>{{ documento.pedido_id }}</td>
+                    <td>{{ documento.estado }}</td>
+                    <td>
+                        <a href="{% url 'detalle_documento_entrega' documento.documento_entrega_id%}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

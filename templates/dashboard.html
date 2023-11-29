@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- Contenido Principal -->
+<div class="cardBox">
+    <div class="card">
+        <div class="numbers">{{ total_pedidos }} <i class="fas fa-box"></i></div>
+        <div class="cardName">
+            Cantidad total de pedidos registrados en el sistema.
+        </div>
+    </div>
+    <div class="card">
+        <div class="numbers">{{ total_productos }} <i class="fas fa-shopping-cart"></i></div>
+        <div class="cardName">
+            Cantidad de productos.
+        </div>
+    </div>
+    <div class="card">
+        <div class="numbers">{{ total_clientes }} <i class="fas fa-user"></i></div>
+        <div class="cardName">
+            Cantidad de usuarios.
+        </div>
+    </div>
+</div>
+
+{% endblock %}

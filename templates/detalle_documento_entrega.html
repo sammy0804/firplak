@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Documento de Entrega{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h4>Detalle del Documento de Entrega: {{ documento.documento_entrega_id }}</h4>
+        <p>ID del Pedido: {{ documento.pedido_id }}</p>
+        <p>Estado: {{ documento.estado }}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Pedidos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Lista de Pedidos</h4><br>
+    <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#crearPedidoModal">
+        <i class="fas fa-plus"></i> Crear Pedido
+    </button>
+    </br></br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID del Pedido</th>
+                <th>Cliente ID</th>
+                <th>Fecha del Pedido</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.pedido_id }}</td>
+                    <td>{{ pedido.cliente_id }}</td>
+                    <td>{{ pedido.fecha_pedido }}</td>
+                    <td>{{ pedido.estado }}</td>
+                    <td>
+
+                        <a href="{% url 'detalle_pedido' pedido.pedido_id %}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{% url 'actualizar_pedido' pedido.pedido_id %}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarPedidoModal{{ pedido.pedido_id }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+
+                        <div class="modal fade" id="eliminarPedidoModal{{ pedido.pedido_id }}" tabindex="-1" role="dialog" aria-labelledby="eliminarPedidoModalLabel{{ pedido.id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="eliminarPedidoModalLabel{{ pedido.pedido_id }}">Confirmar Eliminación</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas eliminar el pedido "{{ pedido }}"?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <a href="{% url 'eliminar_pedido' pedido.pedido_id %}" class="btn btn-danger">Eliminar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="crearPedidoModal" tabindex="-1" role="dialog" aria-labelledby="crearPedidoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearPedidoModalLabel">Crear Nuevo Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'lista_pedidos' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="document.forms[0].submit();">Crear Pedido</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

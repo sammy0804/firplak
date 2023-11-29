@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Pruebas de Entrega (PODs){% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Pruebas de Entrega (PODs)</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID del POD</th>
+                <th>ID de Guía de Transporte</th>
+                <th>Fecha de Recepción</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pod in pods %}
+                <tr>
+                    <td>{{ pod.pod_id }}</td>
+                    <td>{{ pod.guia_transporte_id }}</td>
+                    <td>{{ pod.fecha_recepcion }}</td>
+                    <td>{{ pod.estado }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

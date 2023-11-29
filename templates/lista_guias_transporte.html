@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Guías de Transporte{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Guías de Transporte</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID de Guía</th>
+                <th>ID del Documento de Entrega</th>
+                <th>ID del Transportista</th>
+                <th>Fecha de Despacho</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guia in guias %}
+                <tr>
+                    <td>{{ guia.guia_transporte_id }}</td>
+                    <td>{{ guia.documento_entrega_id }}</td>
+                    <td>{{ guia.transportista_id }}</td>
+                    <td>{{ guia.fecha_despacho }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

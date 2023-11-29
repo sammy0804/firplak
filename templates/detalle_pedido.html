@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Pedido{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Detalle del Pedido: {{ pedido.pedido_id }}</h4>
+    <p>Cliente ID: {{ pedido.cliente_id }}</p>
+    <p>Fecha del Pedido: {{ pedido.fecha_pedido }}</p>
+    <p>Estado: {{ pedido.estado }}</p>
+    <h5>Líneas de Pedido</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Línea de Pedido</th>
+                <th>Producto ID</th>
+                <th>Cantidad</th>
+                <th>Fecha Entrega Estimada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for linea in lineas_pedido %}
+                <tr>
+                    <td>{{ linea.linea_pedido_id }}</td>
+                    <td>{{ linea.producto_id }}</td>
+                    <td>{{ linea.cantidad }}</td>
+                    <td>{{ linea.fecha_entrega_estimada }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
